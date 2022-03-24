@@ -1,8 +1,18 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+//HOME I PROFILE
+.navbar-header {
+  margin-right: 1800px;
+}
+
+//CEO SIDEBAR
+// -dodali smo ovaj id u  fajl   resources/views/layouts/admin.blade.php:
+//<div class="navbar-default sidebar" id="mainnavbar" role="navigation">
+#mainnavbar {
+  margin-top: 1380px;
+}

@@ -1,1 +1,1 @@
-<h1>It is working</h1>
+<h1>It is working admin/users/index</h1>
