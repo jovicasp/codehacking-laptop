@@ -125,9 +125,11 @@
                             <li>
                                 <a href="{{route('users.index')}}">All Users</a>
                             </li>
-
                             <li>
                                 <a href="{{route('users.create')}}">Create User</a>
+                            </li>
+                            <li>
+                                {{--<a href="{{route('users.edit', )}}">Edit User</a>--}}
                             </li>
 
                         </ul>

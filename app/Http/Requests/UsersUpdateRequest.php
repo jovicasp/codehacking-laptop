@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsersCreateRequest extends FormRequest
+class UsersUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,11 @@ class UsersCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required|min:5',
-           'role_id'=>'required',
-           'is_active'=>'required'
+            'name'=>'required',
+            'email'=>'required',
+            'password' => 'min:5',     ////PASWORD NE MORA BITI REQUIRED JER GA VEC IMA U DB, ALI OSTALA VALIDACIJA DA
+            'role_id'=>'required',
+            'is_active'=>'required'
         ];
     }
 }
