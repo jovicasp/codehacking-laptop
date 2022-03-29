@@ -94,15 +94,22 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(UsersUpdateRequest $request, $id)
     {
+//        dd($request->password);
         $user = User::findOrFail($id);
 
         if (trim($request->password) == ''){
             $input = $request->except('password');
         }else{
             $input = $request->all();
+            //ALTHOUGH PSW IS NOT REQUIRED DURING USER EDITING, IF IT IT INSERTED IN ORDER TO CHANGE
+            //WE NEED TO VALIDATE IT NOW!!!
+            $this->validate($request, [
+                'password'=>'min:5'
+            ]);
             $input['password'] = bcrypt($request->password);
         }
 
@@ -126,6 +133,7 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user=User::whereId($id)->delete();
+        return redirect(route('users.index'));
     }
 }

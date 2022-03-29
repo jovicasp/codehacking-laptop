@@ -23,13 +23,32 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+{{-----------------------------------------------HEAD FROM APP-------------------------------------------}}
+    {{--<meta charset="utf-8">--}}
+    {{--<meta name="viewport" content="width=device-width, initial-scale=1">--}}
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    {{--<title>{{ config('app.name', 'Laravel') }}</title>--}}
+
+    <!-- Scripts -->
+    {{--<script src="{{ asset('js/app.js') }}" defer></script>--}}
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+{{-----------------------------------------------END HEAD FROM APP-------------------------------------------}}
 
 
 
 </head>
 
 <body id="admin-page">
+
 
 <div id="wrapper">
 
@@ -72,10 +91,7 @@
 
         </ul>
 
-
-
-
-
+{{------------------ZA POJAVU IMENA ULOGOVANOG USERA!!!----------}}
 
         {{--<ul class="nav navbar-nav navbar-right">--}}
         {{--@if(auth()->guest())--}}
@@ -96,11 +112,47 @@
         {{--</li>--}}
         {{--@endif--}}
         {{--</ul>--}}
+{{---------------------------------------------------------------------------------------------}}
+    <!-- Right Side Of Navbar -->
+        <ul class="navbar-nav ms-auto">
+            <!-- Authentication Links -->
+            @guest
+                @if (Route::has('login'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                @endif
 
+                @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
+            @else
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="text-decoration: none;color:blue;font-size:12px;">
+                        <i class="fa fa-user fa-fw"></i>
+                        <i class="fa fa-caret-down"></i>
+                        <strong>{{ Auth::user()->name }}</strong>
+                    </a>
 
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           style="text-decoration: none;color:blue;font-size:12px;"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            <strong>{{ __('Logout') }}</strong>
+                        </a>
 
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            @endguest
+        </ul>
 
-
+{{---------------------------------------------------------------------------------------------}}
         <div class="navbar-default sidebar" id="mainnavbar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -350,7 +402,7 @@
 
 <!-- jQuery -->
 <script src="{{asset('js/libs.js')}}"></script>
-
+<script src="{{asset('js/app.js')}}" defer></script>
 
 @yield('footer')
 

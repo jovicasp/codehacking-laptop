@@ -16,6 +16,7 @@
             <th>Created</th>
             <th>Updated</th>
             <th>Edit</th>
+            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -25,7 +26,9 @@
                     <td>{{$user->id}}</td>
                     <td><a href="{{route('users.edit', $user->id)}}">{{$user->name}}</a></td>
                     <div class="image-container">
-                        <td><img height="40" src="{{$user->photo ? $user->photo->path : 'https://via.placeholder.com/400x400'}}"></td>
+                        <td><img height="40"
+                                 src="{{$user->photo ? $user->photo->path : 'https://via.placeholder.com/400x400'}}">
+                        </td>
                     </div>
                     <td>{{$user->email}}</td>
                     <td>{{$user->role->name}}</td>
@@ -35,6 +38,15 @@
                     <td>{!! link_to_route('users.edit', $title='Edit this user',
                     $parameters=[$user->id, '<i class="fa fa-building"></i> Button'],
                     ['type'=>'button', 'class'=>'btn btn-primary']) !!}</td>
+                    <div class="form-group">
+                        <td>
+                            {!! Form::open(['method'=>'DELETE','action'=>['App\Http\Controllers\AdminUsersController@destroy', $user->id]]) !!}
+                            {!! Form::submit('Delete this User',
+                            ['class'=>'btn btn-danger']) !!}
+                            {{--['class'=>'btn btn-danger', 'style'=>'float: right;margin-top: -40px;']) !!}--}}
+                            {!! Form::close() !!}
+                        </td>
+                    </div>
                 </tr>
             @endforeach
         @endif
