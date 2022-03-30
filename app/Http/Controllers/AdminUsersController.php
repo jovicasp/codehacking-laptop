@@ -8,6 +8,7 @@ use App\Models\Photo;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
 {
@@ -59,8 +60,29 @@ class AdminUsersController extends Controller
         }
 
 //        $input['password'] = bcrypt($request->password);
-        User::create($input);
+        $user = User::create($input);
+        Session::flash('created_user', 'The user '.$user->name.' has been created!');
         return redirect(route('users.index'));
+    }
+
+    public function create_random_user(){
+        $names=['Nikola Jovanović','Ivan Petrović','Jovan Nikolić','Marija Marković','Ana Đorđević','Mihailo Stojanović','Aleksandar Ilić','Andrej Stanković','Teodora Pavlović','Jelena Milošević','Sofija Jovanović','Katarina Petrović','Nikola Nikolić','Đorđe Marković','Stefan Đorđević','Petar Stojanović','Vasilije Ilić','Todor Stanković','Marko Pavlović','Anđelka Milošević','Antonije Jovanović','Pavle Petrović','Srđan Nikolić','Marina Marković','Natalija Đorđević','Kornelije Stojanović','Igor Ilić','Oliver Stanković','Olga Pavlović'];
+        $emails=['nikolajovanovic@mail.com','ivanpetrovic@mail.com','jovannikolic@mail.com','marijamarkovic@mail.com','anadjordjevic@mail.com','mihailostojanovic@mail.com','aleksandarilic@mail.com','andrejstankovic@mail.com','teodorapavlovic@mail.com','jelenamilosevic@mail.com','sofijajovanovic@mail.com','katarinapetrovic@mail.com','nikolanikolic@mail.com','djordjemarkovic@mail.com','stefandjordjevic@mail.com','petarstojanovic@mail.com','vasilijeilic@mail.com','todorstankovic@mail.com','markopavlovic@mail.com','andjelkamilosevic@mail.com','antonijejovanovic@mail.com','pavlepetrovic@mail.com','srdjannikolic@mail.com','marinamarkovic@mail.com','natalijadjordjevic@mail.com','kornelijestojanovic@mail.com','igorilic@mail.com','oliverstankovic@mail.com','olgapavlovic@mail.com'];
+        $photo_id = random_int (1, 25);
+        $name = $names[array_rand($names,1)];
+        $email = $emails[array_rand($emails,1)];
+
+        $user = User::create([
+            'name'=>$name,
+            'email'=>$email,
+            'password'=>'12345678',
+            'role_id'=>'3',
+            'is_active'=>'0',
+            'photo_id'=>$photo_id,
+        ]);
+        Session::flash('created_user', 'The user '.$user->name.' has been created!');
+        return redirect(route('users.index'));
+
     }
 
     /**
@@ -94,6 +116,7 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
      * @return \Illuminate\Http\Response
+     * //     * @throws \Illuminate\Validation\ValidationException
      * @throws \Illuminate\Validation\ValidationException
      */
     public function update(UsersUpdateRequest $request, $id)
@@ -104,12 +127,12 @@ class AdminUsersController extends Controller
         if (trim($request->password) == ''){
             $input = $request->except('password');
         }else{
-            $input = $request->all();
-            //ALTHOUGH PSW IS NOT REQUIRED DURING USER EDITING, IF IT IT INSERTED IN ORDER TO CHANGE
+            //ALTHOUGH PSW IS NOT REQUIRED DURING USER EDITING, IF IT IS INSERTED IN ORDER TO CHANGE IT
             //WE NEED TO VALIDATE IT NOW!!!
             $this->validate($request, [
                 'password'=>'min:5'
             ]);
+            $input = $request->all();
             $input['password'] = bcrypt($request->password);
         }
 
@@ -122,6 +145,8 @@ class AdminUsersController extends Controller
         }
         $user->update($input);
 
+        Session::flash('updated_user', 'The user '.$user->name.' has been updated!');
+
         return redirect(route('users.index'));
     }
 
@@ -133,7 +158,13 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::whereId($id)->delete();
+        $user=User::findOrFail($id);
+        Photo::findOrFail($user->photo->id)->delete();      //DELETE FROM DB-TABLE-PHOTOS
+        unlink(public_path().$user->photo->path);   //DELETE FILE FROM PUBLIC/IMAGES FOLDER
+
+        Session::flash('deleted_user', 'The user '.$user->name.' has been deleted!');
+        $user->delete();
+
         return redirect(route('users.index'));
     }
 }

@@ -2,7 +2,26 @@
 
 
 @section('content')
+
+    @if(Session::has('deleted_user'))
+        <p class="bg-danger"  style="color:white;font-size:15px;">{{Session::get('deleted_user')}}</p>
+    @endif
+
     <h1>Users</h1>
+
+    <a href="{{ url('/cru') }}">
+        <button class="btn btn-success" style="margin-left: 500px; margin-top: -40px; padding: 10px;font-size:12px">
+            {{ "Create random user" }}
+        </button>
+    </a>
+    @if(Session::has('created_user'))
+        <p class="bg-primary"  style="color:white;font-size:15px;">{{Session::get('created_user')}}</p>
+    @endif
+    @if(Session::has('updated_user'))
+        <p class="bg-primary" style="color:white;font-size:15px;">
+            {{Session::get('updated_user')}}
+        </p>
+    @endif
 
     <table class="table table-hover">
         <thead>

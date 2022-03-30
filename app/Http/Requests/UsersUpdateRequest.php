@@ -26,8 +26,6 @@ class UsersUpdateRequest extends FormRequest
         return [
             'name'=>'required',
             'email'=>'required',
-//            'password' => 'min:5',     ////PASWORD NE MORA BITI REQUIRED JER GA VEC IMA U DB,
-                                        // ALI ako se menje PSW potrebna je OSTALA VALIDACIJA(duzina psw isl)
             'role_id'=>'required',
             'is_active'=>'required'
         ];
