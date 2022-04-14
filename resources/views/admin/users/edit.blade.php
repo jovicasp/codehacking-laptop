@@ -4,7 +4,7 @@
     {{--{{$user->id}}--}}
 
     <div class="col-sm-3">
-        <img src="{{$user->photo ? $user->photo->path : 'https://via.placeholder.com/400x400'}}" alt=""
+        <img src="{{$user->photos->first() ? ($user->photos->first())['path'] : 'https://via.placeholder.com/400x400'}}" alt=""
              class="img-responsive img-rounded">
     </div>
     <div class="col-sm-9">
@@ -36,8 +36,8 @@
         {{--PHOTO CE SE PRIKAZIVATI SAMO NA POCETKU A NE I PORED BROWSE ZA NOVU SLIKU--}}
         {!! '</br>' !!}
         <div class="form-group">
-        {!! Form::label('photo_id', 'Photo') !!}
-        {!! Form::file('photo_id', null, ['class'=>'form-control']) !!}
+        {!! Form::label('photo', 'Photo') !!}
+        {!! Form::file('photo', null, ['class'=>'form-control']) !!}
         {{--<div class="image-container" style="margin: -30px 0px 0px 310px;">--}}
         {{--<td>--}}
         {{--<img height="40" src="{{$user->photo ? $user->photo->path : 'no photo file'}}">--}}

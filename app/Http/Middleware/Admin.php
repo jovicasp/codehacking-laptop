@@ -34,6 +34,6 @@ class Admin
         Session::flash('not_admin_not_active','You are NOT Authorized to see the page, You intended to!');
         return redirect('/admin');      //BACK TO ADMIN DASHBOARD
 //        return redirect('/home');         //BACK TO HOME PAGE
-//        return redirect(404);             //GET 4040 ERROR PAGE
+//        return redirect(404);             //GET 404 ERROR PAGE
     }
 }

@@ -11,7 +11,11 @@ class Photo extends Model
 
     protected $directory = '/images/';
 
-    protected $fillable = ['path'];
+    protected $fillable = ['path', 'imageable_id', 'imageable_type'];
+
+    public function imageable(){
+        return $this->morphTo();
+    }
 
     public function getPathAttribute($value){
         return $this->directory . $value;

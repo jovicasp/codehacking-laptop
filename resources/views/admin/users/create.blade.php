@@ -2,6 +2,8 @@
 @section('content')
     <h1>Create User</h1>
 
+    <div class="row">
+
     {!! Form::open(['method'=>"POST", 'action'=>"App\Http\Controllers\AdminUsersController@store", 'files'=>true]) !!}
     <div class="form-group">
         {!! Form::label('name', 'Name') !!}
@@ -29,8 +31,8 @@
     </div>
     {!! '</br>' !!}
      <div class="form-group">
-             {!! Form::label('photo_id', 'Photo') !!}
-             {!! Form::file('photo_id', null, ['class'=>'form-control']) !!}
+             {!! Form::label('photo', 'Photo') !!}
+             {!! Form::file('photo', null, ['class'=>'form-control']) !!}
       </div>
     {!! '</br>' !!}{!! '</br>' !!}
     {{--//ZA SNIPET SUBMIT ////////////--}}
@@ -40,5 +42,9 @@
     {{--/////////////////////////////--}}
     {!! Form::close() !!}
       {!! '</br>' !!}
+    </div>
+
+    <div class="row">
     @include('includes.display-form-errors')
+    </div>
 @endsection

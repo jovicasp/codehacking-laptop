@@ -3,7 +3,7 @@
         <ul>
             @foreach($errors->all() as $error)
                 <li>
-                    {{$error}}
+                    <h4>{{$error}}</h4>
                 </li>
             @endforeach
         </ul>

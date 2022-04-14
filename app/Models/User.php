@@ -23,7 +23,6 @@ class User extends Authenticatable
         'password',
         'role_id',
         'is_active',
-        'photo_id',
     ];
 
     /**
@@ -48,9 +47,19 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo('App\Models\Role');
     }
-    public function photo(){
-        return $this->belongsTo('App\Models\Photo');
+
+    public function posts(){
+        return $this->hasMany('App\Models\Post');
     }
+//    public function photo(){
+//        return $this->belongsTo('App\Models\Photo');
+//    }
+//RELAC. METODA ZA PM OtM RELACIJU
+    public function photos(){
+        return $this->morphMany('App\Models\Photo', 'imageable');
+    }
+
+
 
     public function isAdmin(){
         if ($this->role->name =='administrator' && $this->is_active == 1){

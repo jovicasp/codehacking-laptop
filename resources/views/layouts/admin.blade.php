@@ -12,16 +12,18 @@
     <title>Admin</title>
 
     <!-- Bootstrap Core CSS -->
+
+
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/libs.css')}}" rel="stylesheet">
-
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
     <![endif]-->
 {{-----------------------------------------------HEAD FROM APP-------------------------------------------}}
     {{--<meta charset="utf-8">--}}
@@ -66,30 +68,30 @@
         <!-- /.navbar-header -->
 
 
-
-        <ul class="nav navbar-top-links navbar-right">
-
-
-            <!-- /.dropdown -->
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
-            </li>
-            <!-- /.dropdown -->
+{{---------------------NAVBAR ZA PROFIL I LOGOVANJE USERA OD LAYOUT/ADMIN-------------}}
+        {{--<ul class="nav navbar-top-links navbar-right">--}}
 
 
-        </ul>
+            {{--<!-- /.dropdown -->--}}
+            {{--<li class="dropdown">--}}
+                {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
+                    {{--<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>--}}
+                {{--</a>--}}
+                {{--<ul class="dropdown-menu dropdown-user">--}}
+                    {{--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>--}}
+                    {{--</li>--}}
+                    {{--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>--}}
+                    {{--</li>--}}
+                    {{--<li class="divider"></li>--}}
+                    {{--<li><a href="{{ url('/logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
+                {{--<!-- /.dropdown-user -->--}}
+            {{--</li>--}}
+            {{--<!-- /.dropdown -->--}}
+
+
+        {{--</ul>--}}
 
 {{------------------ZA POJAVU IMENA ULOGOVANOG USERA!!!----------}}
 
@@ -192,11 +194,11 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/posts">All Posts</a>
+                                <a href="{{route('posts.index')}}">All Posts</a>
                             </li>
 
                             <li>
-                                <a href="/posts/create">Create Post</a>
+                                <a href="{{route('posts.create')}}">Create Post</a>
                             </li>
 
                         </ul>
@@ -338,40 +340,30 @@
 
 
 
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav navbar-collapse">
-            <ul class="nav" id="side-menu">
-                <li>
-                    <a href="/profile"><i class="fa fa-dashboard fa-fw"></i>Profile</a>
-                </li>
+    {{--<div class="navbar-default sidebar" role="navigation">--}}
+        {{--<div class="sidebar-nav navbar-collapse">--}}
+            {{--<ul class="nav" id="side-menu">--}}
+                {{--<li>--}}
+                    {{--<a href="/profile"><i class="fa fa-dashboard fa-fw"></i>Profile</a>--}}
+                {{--</li>--}}
 
+                {{--<li>--}}
+                    {{--<a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>--}}
+                    {{--<ul class="nav nav-second-level">--}}
+                        {{--<li>--}}
+                            {{--<a href="">All Posts</a>--}}
+                        {{--</li>--}}
 
+                        {{--<li>--}}
+                            {{--<a href="">Create Post</a>--}}
+                        {{--</li>--}}
 
-
-                <li>
-                    <a href="#"><i class="fa fa-wrench fa-fw"></i> Posts<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="">All Posts</a>
-                        </li>
-
-                        <li>
-                            <a href="">Create Post</a>
-                        </li>
-
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-
-
-
-
-
-            </ul>
-
-        </div>
-
-    </div>
+                    {{--</ul>--}}
+                    {{--<!-- /.nav-second-level -->--}}
+                {{--</li>--}}
+            {{--</ul>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 
 </div>
 
@@ -401,14 +393,10 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
+
 <script src="{{asset('js/libs.js')}}"></script>
 <script src="{{asset('js/app.js')}}" defer></script>
-
 @yield('footer')
-
-
-
-
 
 </body>
 
