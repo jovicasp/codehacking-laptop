@@ -34,3 +34,6 @@ mix
         'resources/assets/js/libs/scripts.js'
     ],  'public/js/libs.js')
     .sourceMaps();
+// mix.browserSync('http://localhost:8000/');
+// mix.browserSync('192.168.56.56:8000');
+// mix.browserSync('127.0.0.1:8000');
